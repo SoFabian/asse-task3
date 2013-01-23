@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public type="drawable" name="ic_launcher" id="0x7f020001" />
+    <public type="drawable" name="ic_contact_picture_2" id="0x7f020000" />
+    <public type="layout" name="activity_show_entries" id="0x7f030000" />
+    <public type="layout" name="main" id="0x7f030001" />
+    <public type="layout" name="row" id="0x7f030002" />
+    <public type="raw" name="android" id="0x7f040000" />
+    <public type="raw" name="androidplatform" id="0x7f040001" />
+    <public type="string" name="app_name" id="0x7f050000" />
+    <public type="string" name="welcome" id="0x7f050001" />
+    <public type="string" name="search" id="0x7f050002" />
+    <public type="id" name="searchName" id="0x7f060000" />
+    <public type="id" name="search" id="0x7f060001" />
+    <public type="id" name="authKey" id="0x7f060002" />
+    <public type="id" name="login" id="0x7f060003" />
+    <public type="id" name="row" id="0x7f060004" />
+    <public type="id" name="contact_image" id="0x7f060005" />
+    <public type="id" name="toptext" id="0x7f060006" />
+    <public type="id" name="bottomtext" id="0x7f060007" />
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="searchName">false</item>
+    <item type="id" name="search">false</item>
+    <item type="id" name="authKey">false</item>
+    <item type="id" name="login">false</item>
+    <item type="id" name="row">false</item>
+    <item type="id" name="contact_image">false</item>
+    <item type="id" name="toptext">false</item>
+    <item type="id" name="bottomtext">false</item>
+</resources>
