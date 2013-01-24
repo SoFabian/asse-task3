@@ -69,7 +69,7 @@ public class FakeServer {
 		sslContext.init(localKeyManagerFactory.getKeyManagers(), new TrustManager[] { trustManager }, secureRandom);
 
 		SSLServerSocketFactory factory = sslContext.getServerSocketFactory();
-		serverSocket = (SSLServerSocket) factory.createServerSocket(Main.getRealServerPort());
+		serverSocket = (SSLServerSocket) factory.createServerSocket(8080);
 
 		executor.submit(new ClientRequestAcceptor());
 	}
@@ -107,10 +107,11 @@ public class FakeServer {
 			try {
 				reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				PrintWriter writer = new PrintWriter(socket.getOutputStream());
-				for (String query = null; (query = reader.readLine()) != null;) {
+				String query = null;
+				if ((query = reader.readLine()) != null) {
 					System.out.println("Received query from client: " + query);
 					ServerBackend realServer = new ServerBackend();
-					realServer.connect(Main.getRealServerAddress(), Main.getRealServerPort());
+					realServer.connect(Main.getRealServerAddress(), 8022); //Main.getRealServerPort() - replaced due to local port forwarding to real server
 					realServer.forwardQuery(query, writer);
 				}
 			} catch (Exception e) {
