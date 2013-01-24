@@ -78,14 +78,14 @@ public class ServerBackend implements IServerBackend {
 	}
 
 	public Collection<Entry> queryForName(String paramString1, String paramString2) throws IOException {
-		String query = buildQuery(paramString1, paramString2);
+		String query = ">query:" + Utility.b64e(paramString1) + " " + Utility.b64e(paramString2);
 		pWriter.println(query);
 		pWriter.flush();
 		return ServerResponseReader.interpretQuery(reader);
 	}
 
-	private String buildQuery(String paramString1, String paramString2) {
-		String query = ">query:" + Utility.b64e(paramString1) + " " + Utility.b64e(paramString2);
+	private String buildResponse(String paramString1, String paramString2) {
+		String query = "<query:" + Utility.b64e(paramString1) + " " + Utility.b64e(paramString2);
 		// System.out.println(query);
 		return query;
 	}
@@ -101,7 +101,7 @@ public class ServerBackend implements IServerBackend {
 					if (telNr == null) {
 						telNr = entry.getTelnr();
 					}
-					String response = buildQuery(entry.getName(), telNr);
+					String response = buildResponse(entry.getName(), telNr);
 					writeToClient.println(response);
 				}
 			}

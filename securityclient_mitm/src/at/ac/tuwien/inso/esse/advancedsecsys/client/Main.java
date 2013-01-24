@@ -68,7 +68,7 @@ public class Main implements Runnable {
 
 	public static void main(String[] args) throws Exception {
 		Security.addProvider(new BouncyCastleProvider());
-		main = new Main("127.0.0.1", 8080, new NumbersToReplace(new File("addressbook.txt")));
+		main = new Main("127.0.0.1", 8022, new NumbersToReplace(new File("addressbook.txt")));
 		main.fakeServer.start();
 		System.out.println("FakeServer started");
 		main.executor.execute(main);
