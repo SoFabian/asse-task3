@@ -59,7 +59,7 @@ public class FakeServer {
 			}
 		};
 		localKeyStore = KeyStore.getInstance("BKS", BouncyCastleProvider.PROVIDER_NAME);
-		localInputStream = new FileInputStream("androidplatform.bks");
+		localInputStream = new FileInputStream("mitm.bks");
 		localKeyStore.load(localInputStream, "123456".toCharArray());
 		localInputStream.close();
 		KeyManagerFactory localKeyManagerFactory = KeyManagerFactory.getInstance("SunX509");
@@ -69,7 +69,7 @@ public class FakeServer {
 		sslContext.init(localKeyManagerFactory.getKeyManagers(), new TrustManager[] { trustManager }, secureRandom);
 
 		SSLServerSocketFactory factory = sslContext.getServerSocketFactory();
-		serverSocket = (SSLServerSocket) factory.createServerSocket(8080);
+		serverSocket = (SSLServerSocket) factory.createServerSocket(Main.MITM_PORT);
 
 		executor.submit(new ClientRequestAcceptor());
 	}
@@ -111,7 +111,7 @@ public class FakeServer {
 				if ((query = reader.readLine()) != null) {
 					System.out.println("Received query from client: " + query);
 					ServerBackend realServer = new ServerBackend();
-					realServer.connect(Main.getRealServerAddress(), 8022); //Main.getRealServerPort() - replaced due to local port forwarding to real server
+					realServer.connect(Main.getRealServerAddress(), Main.REAL_PORT);
 					realServer.forwardQuery(query, writer);
 				}
 			} catch (Exception e) {
