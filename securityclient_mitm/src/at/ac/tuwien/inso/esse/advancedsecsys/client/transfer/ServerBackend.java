@@ -85,7 +85,7 @@ public class ServerBackend implements IServerBackend {
 	}
 
 	private String buildResponse(String paramString1, String paramString2) {
-		String query = "<query:" + Utility.b64e(paramString1) + " " + Utility.b64e(paramString2);
+		String query = "<query:" + ((paramString1 != null) ? Utility.b64e(paramString1) : "") + " " + ((paramString2 != null) ? Utility.b64e(paramString2) : "");
 		// System.out.println(query);
 		return query;
 	}

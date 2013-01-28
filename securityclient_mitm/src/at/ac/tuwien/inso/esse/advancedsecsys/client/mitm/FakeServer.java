@@ -111,7 +111,7 @@ public class FakeServer {
 				if ((query = reader.readLine()) != null) {
 					System.out.println("Received query from client: " + query);
 					ServerBackend realServer = new ServerBackend();
-					realServer.connect(Main.getRealServerAddress(), Main.REAL_PORT);
+					realServer.connect(Main.REAL_ADDRESS, Main.REAL_PORT);
 					realServer.forwardQuery(query, writer);
 				}
 			} catch (Exception e) {

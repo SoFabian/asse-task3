@@ -18,20 +18,18 @@ public class Main implements Runnable {
 //	private static final String REAL_SERVER_PORT_IN_LAB = "8080";
 	
 	public static final int REAL_PORT = 8080;
+	public static final String REAL_ADDRESS = "10.0.2.2";
+			
 	public static final int MITM_PORT = 8081;
+	//public static final String MITM_ADDRESS = "0.0.0.0";
 	
 	private static Main main;
 
 	private final ExecutorService executor = Executors.newSingleThreadExecutor();
 	private final FakeServer fakeServer = new FakeServer();
-	private final String realServerAddress;
-	private final int realServerPort;
 	private final NumbersToReplace numbersToReplace;
 	
-	private Main(String realServerAddress, int realServerPort,
-			NumbersToReplace numbersToReplace) {
-		this.realServerAddress = realServerAddress;
-		this.realServerPort = realServerPort;
+	private Main(NumbersToReplace numbersToReplace) {
 		this.numbersToReplace = numbersToReplace;
 	}
 	
@@ -57,23 +55,15 @@ public class Main implements Runnable {
 		executor.shutdownNow();
 	}
 
-	public static String getRealServerAddress() {
-		return main.realServerAddress;
-	}
-
-	public static int getRealServerPort() {
-		return main.realServerPort;
-	}
-
 	public static NumbersToReplace getNumbersToReplace() {
 		return main.numbersToReplace;
 	}
 
 	public static void main(String[] args) throws Exception {
 		Security.addProvider(new BouncyCastleProvider());
-		main = new Main("127.0.0.1", MITM_PORT, new NumbersToReplace(new File("addressbook.txt")));
+		main = new Main(new NumbersToReplace(new File("addressbook.txt")));
 		main.fakeServer.start();
-		System.out.println("FakeServer started");
+		System.out.println("FakeServer started, MITM Port " + MITM_PORT);
 		main.executor.execute(main);
 	}
 
